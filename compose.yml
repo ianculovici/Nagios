@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nagios:
+    image: ianculovici/nagios:latest
+    container_name: "mynagios"
+    hostname: nagios.example.local
+    restart: always
+    volumes:
+        - ./data/etc/:/opt/nagios/etc/
+        - ./data/var/:/opt/nagios/var/
+        - ./data/ssmtp/:/etc/ssmtp/
+        - ./data/custom-plugins:/opt/Custom-Nagios-Plugins
+        - ./data/monitor-ssh:/home/nagios/monitor
+    ports:
+        - "5080:80"
+    environment:
+        NAGIOS_TIMEZONE: "US/Central"
